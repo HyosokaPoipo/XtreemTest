@@ -1,6 +1,8 @@
 package hisoka.poipo;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainXT {
 
@@ -17,27 +19,30 @@ public class MainXT {
 		
 		int[]C = {1,3,2,1};
 		int[]D = {4,5};
-		System.out.println("Hasil Soal 2 : "+solution2a(A,B));
-		System.out.println("Hasil Soal 2 : "+solution2a(C,D));
+		
+		int[]E1 = {2};
+		int[]F1  ={1};
+		//System.out.println("Hasil Soal 2 : "+solution2a(A,B));
+		System.out.println("Hasil Soal 2 EF : "+solution2a(E1,F1));
 		
 		printMessage("===========Soal 3================");
 		int[]E = {1,2,5,8,9};
 		int[]F = {1, 2, 5, 9, 9};
-		System.out.println("Hasil Soal 3 : "+solution3(F,5));
-		
+		//System.out.println("Hasil Soal 3 : "+solution3(F,5));
+		testSol3();
 		
 		/*
 		printMessage("===========Soal 4================");
 		System.out.println("IntegerMIN "+ Integer.MIN_VALUE);
 		
+		*/
 		
-		
-		printMessage("===========Soal 5================");
-		int[] G = {1, 7, 5, 4, 9, 9};
+		//printMessage("===========Soal 5================");
+		/*int[] G = {1, 7, 5, 4, 9, 9};
 		int[] H = {1, 3, 5, 3, 4};
 		System.out.println("Hasil Soal 5 : "+solution5(G));
-		System.out.println("Hasil Soal 5 : "+solution5(H));
-		*/
+		System.out.println("Hasil Soal 5 : "+solution5(H));*/
+		//testSolution5();
 	}
 	
 	public int solution4(Tree T) {
@@ -65,6 +70,123 @@ public class MainXT {
 	        return num + countV(T.l, maxValue) + countV(T.r, maxValue);
 	    }
 	
+	 /******************************************************************************/
+    public static void testSolution5()
+    {
+    	int[]A = {1,2};
+    	int[]B = {1,3,6,3,5,5,3,7,7};
+    	int[]C = {1, 4, 5, 6, 7, 2}; 
+    	int[]D = {1,2,3,4,5,6,7,8,9,10,11,2,45,56,67,78,89,90,123,124,1245566778};
+    	int[]E = {1, 5, 3, 3, 7} ;
+    	int[]F= {1, 3, 5};
+    	//System.out.println("hasil C 5 : "+solution5(C));
+    	//System.out.println("hasil C 5a : "+solution5a(C));
+    	System.out.println("hasil D 5a : "+solution5a(F));
+    	System.out.println("hasil E 5a : "+solution5a(E));
+    }
+	 
+	public static boolean solution5a(int[] A) 
+	{
+		int max = A[0], maxIndex = 0;
+		
+	    //find the maximum element in the array
+	    for(int i=0;i<A.length;i++)
+	    {
+	        if(A[i] > max)
+	        {
+	            max = A[i];
+	            maxIndex = i;
+	        }
+	    }
+
+	    //check whether all the elements before max are less than it
+	    // if not you need more swaps to sort
+	    for(int j=0;j<maxIndex;j++)
+	    {
+	        if(A[j]>max)
+	            return false;
+	    }
+
+
+	    //check the smallest element after maximum element
+	    /*for(int j=maxIndex; j<A.length; j++)
+	    {
+	    	if(A[maxIndex])
+	    }
+	    */
+	    for(int j=maxIndex+1;j<A.length-1;j++)
+	    {
+	        if(!(max > A[j] && A[j+1] <A[j]))
+	            return false;
+	    }
+
+	    if(A.length<=3)
+	      {
+	          int hisoka = 0;
+		    for(int i=0; i+2<=3; i++)
+		    {
+		    	if(A[i]>A[i+1])
+		    	{
+		    		int temp = A[i];
+		    		A[i] = A[i+1];
+		    		A[i+1] = temp;
+		    		for(int j=0; j+1<=3; j++)
+		    		{
+		    			if(A[j] > A[j+1]) return false;
+		    			else return true;
+		    		}
+		    	}
+		    }
+	      }
+	    
+	    
+	    //check what is next smallest element
+	    int[] B = new int[A.length+1];
+	    System.arraycopy(A, 0, B, 0, A.length);
+	    B[A.length] = 2000000000;
+	    for(int j=maxIndex+1;j<B.length-1;j++)
+	    {
+	        if(!(max > B[j] && B[j+1] <B[j]))
+	            return false;
+	    }
+	    
+	    //check middle element error
+	    int count = 0;
+	    for(int i =0; i+1<A.length; i++)
+	    {
+	    	
+	    	if(A[i] > A[i+1]) 
+			{
+	    		int temp = A[i];
+	    		int temp2 = 0;
+	    		for(int j=0; j<A.length; j++)
+	    		{
+	    			if(temp < A[j])
+	    			{
+	    				int[] C = new int[A.length+1];
+	    				System.arraycopy(A, 0, C, 0, A.length);
+	    				C[i] = A[i+1];
+	    				int temp3 = C[j];
+	    				C[j] = temp;
+	    				C[j+1]  = temp3;
+	    				//check one more time
+	    				for(int k =0; k<C.length; k++)
+	    				{
+	    					if(k+2<C.length){
+	    					if(C[k] > C[k+1]) count++;
+	    					}
+	    				}
+	    				if(count == 0) return false;
+	    			}
+	    		}
+			}
+	    }
+	    
+
+	    return true;
+	}
+    
+    
 	public static boolean solution5(int[] A) {
         // write your code in Java SE 8
 		int count = 0;
@@ -91,8 +213,14 @@ public class MainXT {
 		return true;
     }
 	
-	
-	
+	/*****************************************************************************************************/	
+	public static void testSol3()
+	{
+		int[]A = {0,1,2,5,5,5,5,7,8,9};
+		int[]B = {0,-1,2,5,7,8,-9};
+		System.out.println("Hasil Soal 3 A :  "+solution3(A,0));
+		System.out.println("Hasil Soal 3 A :  "+solution3(B,0));
+	}
 	public static int solution3(int[] A, int X) {
         int N = A.length;
         if (N == 0) {
@@ -109,10 +237,39 @@ public class MainXT {
             }
         }
         if (A[l] == X) {
-            return A[l];
+            return l;
         }
         return -1;
     }
+	
+/*****************************************************************************************************/
+
+	public static void testSolution2b()
+	{
+		
+	}
+	
+	public static int solution2b(int[] A, int[] B)
+	{
+		Set<Integer> s = new HashSet<Integer>();
+		 
+		for (int i=0;  i<A.length; i++) {
+		  s.add(A[i]);
+		}
+		 
+		int commonMin = Integer.MAX_VALUE;
+		for (int i=0; i<B.length; i++) {
+		  if (s.contains(B[i])) {
+		    if (B[i] < commonMin){
+		      commonMin = B[i];
+		    }
+		  }
+		}
+		 
+		return commonMin;
+	}
+	
+	
 	
 	public static int solution2a(int[] A, int[] B) {
         // write your code in Java SE 8
