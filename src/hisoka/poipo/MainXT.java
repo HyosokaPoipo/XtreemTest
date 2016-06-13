@@ -20,8 +20,8 @@ public class MainXT {
 		int[]C = {1,3,2,1};
 		int[]D = {4,5};
 		
-		int[]E1 = {2};
-		int[]F1  ={1};
+		int[]E1 = {};
+		int[]F1  ={};
 		//System.out.println("Hasil Soal 2 : "+solution2a(A,B));
 		System.out.println("Hasil Soal 2 EF : "+solution2a(E1,F1));
 		
@@ -29,7 +29,7 @@ public class MainXT {
 		int[]E = {1,2,5,8,9};
 		int[]F = {1, 2, 5, 9, 9};
 		//System.out.println("Hasil Soal 3 : "+solution3(F,5));
-		testSol3();
+		//testSol3();
 		
 		/*
 		printMessage("===========Soal 4================");
@@ -42,7 +42,7 @@ public class MainXT {
 		int[] H = {1, 3, 5, 3, 4};
 		System.out.println("Hasil Soal 5 : "+solution5(G));
 		System.out.println("Hasil Soal 5 : "+solution5(H));*/
-		//testSolution5();
+		testSolution5();
 	}
 	
 	public int solution4(Tree T) {
@@ -73,18 +73,46 @@ public class MainXT {
 	 /******************************************************************************/
     public static void testSolution5()
     {
+    	
     	int[]A = {1,2};
     	int[]B = {1,3,6,3,5,5,3,7,7};
     	int[]C = {1, 4, 5, 6, 7, 2}; 
     	int[]D = {1,2,3,4,5,6,7,8,9,10,11,2,45,56,67,78,89,90,123,124,1245566778};
+    	int[]D1 = {1,2,3,4,5,6,7,8,9,10,11,2,45,56,67,78,89,90,2,123,124,1245566778};
     	int[]E = {1, 5, 3, 3, 7} ;
     	int[]F= {1, 3, 5};
-    	//System.out.println("hasil C 5 : "+solution5(C));
-    	//System.out.println("hasil C 5a : "+solution5a(C));
-    	System.out.println("hasil D 5a : "+solution5a(F));
-    	System.out.println("hasil E 5a : "+solution5a(E));
+    	int[]G = {1,5,3};
+    	int[]H = {1, 2, 6, 3, 4, 5};
+
+    	System.out.println("Test Soal 5");
+    	System.out.println("A : "+solution5c(A));
+    	System.out.println("B : "+solution5c(B));
+    	System.out.println("C : "+solution5c(C));
+    	System.out.println("D : "+solution5c(D));
+    	System.out.println("D1 : "+solution5c(D1));
+    	System.out.println("E : "+solution5c(E));
+    	System.out.println("F : "+solution5c(F));
+    	System.out.println("H : "+solution5c(H));
     }
 	 
+    
+    public static boolean solution5c(int[] A)
+	{
+		int count = 0;
+		int[]B = Arrays.copyOf(A, A.length); 
+		Arrays.sort(B);		
+		for(int i=0; i<A.length; i++)
+		{
+			if(A[i] != B[i]) count++;
+		}
+		
+		if(count > 2) return false;
+		return true;
+	}
+	
+    
+    
+    
 	public static boolean solution5a(int[] A) 
 	{
 		int max = A[0], maxIndex = 0;
@@ -280,6 +308,7 @@ public class MainXT {
 		for(int i=0; i<A.length; i++)
 		{			
 			indeksB = Arrays.binarySearch(B, A[i]);
+			System.out.println("indexB = "+indeksB);
 			if(indeksB != -1 && A[i] == B[indeksB])
 			{				
 				result = A[i];
